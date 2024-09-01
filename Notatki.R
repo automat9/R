@@ -13,5 +13,3 @@ ggplot(power_rangers_seasons, aes(x = season_num, y = number_of_episodes)) +
   geom_line(size = 2, color = "red") +
   scale_x_continuous(breaks = 1:28) +
   labs(x = 'Season Number', y = 'Number of Episodes')
-
-dokończ tu
