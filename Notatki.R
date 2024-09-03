@@ -21,8 +21,6 @@ result <- mtcars %>%
   group_by(cyl) %>%
   summarize(mean_mpg = mean(mpg))
 
-
-
 # a simple boxplot
 ggplot(power_rangers_seasons, aes(x = season_num, y = number_of_episodes)) +
   geom_col()
