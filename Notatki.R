@@ -58,4 +58,32 @@ print(mean_food_tobacco)
 
 #===============================================================================================================================================================================================================
 # Exploring Data
+library(tidyverse)
+?starwars
+dim(starwars) # how many rows then how many variables
+str(starwars) # shows the structure
+glimpse(starwars) # similar to the one above but more neat
+View(starwars)
+head(starwars) # same in Pandas
+tail(starwars) # same in Pandas
+starwars$name # this is how you filter by name
 
+attach(starwars) # so that I don't have to type starwars each time
+names(starwars) # names of variables, useful to know if _ or simply space, cut and paste
+class(hair_color) # type of data, was also shown in glimpse
+length(hair_color) # number of observations/rows
+unique(hair_color) # number of unique values within this variabe (note NA - missing data)
+
+table(hair_color) # counts how many observations have each of these values (ie how many blonde, brown, etc)
+sort(table(hair_color)) # from smallest to largest
+sort(table(hair_color), decreasing = TRUE) # largest to smallest
+View(sort(table(hair_color), decreasing = TRUE)) # easier to look at
+barplot(sort(table(hair_color), decreasing = TRUE)) # a graph!
+# you can use tidyverse to create a more intuitive code
+starwars %>% # keep in mind %>% "and then"
+  select(hair_color) %>%
+  count(hair_color) %>%
+  arrange(desc(n)) %>%
+  View()
+
+cont 17:40 missing data
