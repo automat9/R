@@ -86,4 +86,4 @@ starwars %>% # keep in mind %>% "and then"
   arrange(desc(n)) %>%
   View()
 
-cont 17:40 missing data
+
