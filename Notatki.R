@@ -86,4 +86,15 @@ starwars %>% # keep in mind %>% "and then"
   arrange(desc(n)) %>%
   View()
 
+View(starwars[is.na(hair_color), ]) # argument 'is not available' shows mising values
+starwars[ , ] # as you may rememeber, first position is for rows second is variables
+# if given argument in first position, only SOME rows will be selected
+# if second position blank = all variables/columns will be selected for the rows where the condition is true
+# finding missing data will help you find the root cause of the missing data
 
+# If dealing with numerical data, these are useful:
+class(height)
+length(height)
+summary(height)
+boxplot(height)
+hist(height)
