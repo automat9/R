@@ -1,6 +1,14 @@
 #===============================================================================================================================================================================================================
 # Absolute basics
 
+# Common steps of data analysis using R: 
+# Explore
+# Clean
+# Manipulate
+# Describe & Summarise
+# Visualise
+# Analyse
+
 x <- 5 # this is how you assign numbers to variables
 
 power_rangers_seasons <- read_csv("C:/Users/10/Desktop/power_rangers_seasons.csv") # example of how to assign a dataset to a variable
@@ -58,7 +66,7 @@ mean_food_tobacco <- mean(food_tobacco)
 print(mean_food_tobacco)
 
 #===============================================================================================================================================================================================================
-# Exploring Data
+# Explore
 library(tidyverse)
 ?starwars
 dim(starwars) # how many rows then how many variables
@@ -101,5 +109,36 @@ boxplot(height)
 hist(height)
 
 #===============================================================================================================================================================================================================
-# Cleaning Data
+# Clean
 
+# What does it even mean?
+# A: Each variable is the correct type of data (e.g. int), 
+# select and filter data you want to use
+# find missing data and duplicates,
+# recode values. 
+
+
+library(tidyverse)
+View(starwars)
+
+# Variable types
+glimpse(starwars) #chr,character int,integer, dbl,double(float), list, fct,factor
+class(starwars$gender) # class of variable
+unique(starwars$skin_color) # unique values in that variable
+
+starwars$gender <- as.factor(starwars$gender)
+class(starwars$gender) # assigning order/rank to values in a variable
+levels(starwars$gender) # 1.feminine, 2.masculine, to change it do:
+starwars$gender <- factor((starwars$gender), levels = c("masculine", 
+                                                        "feminine")) # good practice to rearrange vertically not horizontally)
+levels(starwars$gender)
+
+# Select variables
+
+names(starwars) # names of variables
+
+starwars %>%
+  select(name, height, ends_with("color")) %>%
+  print(n = 77) # selects name, height, and all variables that end with color, then prints out 77 results (without it it would've been the first 10)
+
+cont 10:48 clean your data
