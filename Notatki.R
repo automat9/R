@@ -33,6 +33,7 @@ ggplot(power_rangers_seasons, aes(x = season_num, y = number_of_episodes)) +
 
 #===============================================================================================================================================================================================================
 # Basic Statistics
+
 library(tidyverse)
 data() # shows all datasets available IN THE CURRENTLY LOADED LIBRARY (in this case tidyverse)
 data(package = .packages(all.available = TRUE)) # shows all available datasets in all your downloaded libraries, whether they're loaded or not
@@ -98,3 +99,7 @@ length(height)
 summary(height)
 boxplot(height)
 hist(height)
+
+#===============================================================================================================================================================================================================
+# Cleaning Data
+
