@@ -141,4 +141,4 @@ starwars %>%
   select(name, height, ends_with("color")) %>%
   print(n = 77) # selects name, height, and all variables that end with color, then prints out 77 results (without it it would've been the first 10)
 
-cont 10:48 clean your data
+cont 10:48 clean your data 
