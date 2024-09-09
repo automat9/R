@@ -141,4 +141,52 @@ starwars %>%
   select(name, height, ends_with("color")) %>%
   print(n = 77) # selects name, height, and all variables that end with color, then prints out 77 results (without it it would've been the first 10)
 
-cont 10:48 clean your data 
+# Filter
+unique(starwars$hair_color)
+
+starwars %>%
+  select(name, height, ends_with("color")) %>%
+  filter(hair_color %in% c("blond", "brown") & height < 180) # OR = concatenate, AND = & (separate element from the list)
+
+# Missing Data # do not exclude all missing data, as some of that info might be useful
+mean(starwars$height, na.rm = TRUE) # removes 'not available' from calculation, thus making it possible to calculate mean
+
+starwars %>%
+  select(name, gender, hair_color, height)
+
+starwars %>%
+  select(name, gender, hair_color, height) %>%
+  na.omit() # easy way out, we don't know what we've lost, it just omitts all the missing data
+
+starwars %>%
+  select(name, gender, hair_color, height) %>%
+  filter(!complete.cases(.)) %>%
+  drop_na(height)
+# VERY IMPORTANT, without ! it would filter by complete cases (essentially same one as above), but with ! we now get a list showing all the entries with missing d
+# here, drop_na omitts missing height
+
+starwars %>%
+  select(name, gender, hair_color, height) %>%
+  filter(!complete.cases(.)) %>%
+  mutate(hair_color2 = replace_na(hair_color, "none"))
+# characters with missing hair are in fact robots, so they can't have hair
+# we can use hair_color or hair_color 2  (as shown above) to either update the old column or create a new one for comparison)
+
+# Duplicates (no duplicates in starwars, so let's create a new dataset)
+Names <- c("Peter", "Andy", "John", "Peter")
+Age <- c(22, 33, 44, 22)
+
+friends <- data.frame(Names, Age)
+
+friends[!duplicated(friends), ] # omitts duplicates
+
+# Recoding variables # e.g. if we need some variables to be coded as 1 and 2
+starwars %>% 
+  select(name, gender) %>%
+  mutate(gender = recode(gender,
+                         "masculine" = 1,
+                         "feminine" = 2))
+
+#===============================================================================================================================================================================================================
+# Manipulate
+
