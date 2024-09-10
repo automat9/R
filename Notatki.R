@@ -123,7 +123,7 @@ library(tidyverse)
 View(starwars)
 
 # Variable types
-glimpse(starwars) #chr,character int,integer, dbl,double(float), list, fct,factor
+glimpse(starwars) #chr,character int,integer, dbl,double(float), list, fct,factor (stores values + possible levels (of importance))
 class(starwars$gender) # class of variable
 unique(starwars$skin_color) # unique values in that variable
 
@@ -198,4 +198,42 @@ msleep %>%
   rename("conserv" = "conservation")
 glimpse(msleep)
 
-cont 6:25 manipulate data
+# Reorder variables
+msleep %>% 
+  select(vore, name, everything()) # first vore, name, then everything else
+
+# Change a variable type
+class(msleep$vore)
+msleep$vore <- as.factor(msleep$vore)
+glimpse(msleep)
+levels(msleep$vore) # shows values stored in that variable (ranked/ordered)
+# another way to do the same thing
+msleep %>% 
+  mutate(vore = as.character(vore)) %>% 
+  glimpse()
+
+# Select variables to work with (selecting columns/variables)
+names(msleep) # list of variables, let's select a few of them
+
+msleep %>% 
+  select(2:4,
+         awake, 
+         starts_with("sleep"),
+         contains("wt")) %>% 
+  names()
+ # takes second, third and fourth variable, then awake, then ones that start with sleep, then ones that contain wt)
+
+# Filter and arrange data (selecting rows)
+unique(msleep$order)
+
+msleep %>% 
+  filter((order == "Carnivora" |
+            order == "Primates") &
+           sleep_total > 8) %>% 
+  select(name, order, sleep_total) %>% 
+  arrange(-sleep_total) %>% 
+  View()
+# "|" means "or", but why or and not "and"? because basic statistics dumbass
+# also -sleep_total means from highest to lowest, not the "usual" way around 
+
+cont 14:20
