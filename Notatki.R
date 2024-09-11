@@ -1,5 +1,6 @@
 #===============================================================================================================================================================================================================
 # Absolute basics
+install.packages()
 library(tidyverse)
 %>% # = shift + ctrl + M
 # Common steps of data analysis using R: 
@@ -235,5 +236,57 @@ msleep %>%
   View()
 # "|" means "or", but why or and not "and"? because basic statistics dumbass
 # also -sleep_total means from highest to lowest, not the "usual" way around 
+# alternative way of doing the same thing
+msleep %>% 
+  filter(order %in% c("Carnivora", "Primates") &
+           sleep_total > 8) %>%
+  select(name, order, sleep_total) %>% 
+  arrange(order) %>% 
+  View()
+# If arranged by order (non numerical value) it'll be sorted alphabetically
 
-cont 14:20
+# Change observations (mutate)
+msleep %>% 
+  mutate(brainwt = brainwt * 1000) %>% 
+  View()
+# by multiplying the weight by 1000 we're mutating the weight from kg to g
+msleep %>% 
+  mutate(brainwt_in_grams = brainwt * 1000) %>% 
+  View()
+# keep original variable and instead creates a new one
+
+# Conditional changes (if_else)
+## logical vector based on a condition
+msleep$brainwt
+msleep$brainwt > 0.01
+
+size_of_brain <- msleep %>% 
+  select(name, brainwt) %>% 
+  drop_na(brainwt) %>% 
+  mutate(brain_size = if_else(brainwt > 0.01,
+                              "large",
+                              "small"))
+size_of_brain
+
+# Recode data and rename variable
+## Change observations of "large" and "small into 1s and 2s
+size_of_brain %>% 
+  mutate(brain_size = recode(brain_size,
+                             "large" = 1,
+                             "small" = 2))
+
+# Reshape the data from wide to long or long to wide
+library(gapminder)
+View(gapminder)
+
+data <- select(gapminder, country, year, lifeExp)
+View(data) # long dataset, you'll know once you see it, it's long
+
+wide_data <- data %>%
+  pivot_wider(names_from = year, values_from = lifeExp)
+View(wide_data) # wide, looking muuuch better
+
+long_data <- wide_data %>%
+
+
+cont 26:31
