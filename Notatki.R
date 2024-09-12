@@ -43,7 +43,6 @@ ggplot(power_rangers_seasons, aes(x = season_num, y = number_of_episodes)) +
 
 #===============================================================================================================================================================================================================
 # Basic Statistics
-
 library(tidyverse)
 data() # shows all datasets available IN THE CURRENTLY LOADED LIBRARY (in this case tidyverse)
 data(package = .packages(all.available = TRUE)) # shows all available datasets in all your downloaded libraries, whether they're loaded or not
@@ -112,7 +111,6 @@ hist(height)
 
 #===============================================================================================================================================================================================================
 # Clean
-
 # What does it even mean?
 # A: Each variable is the correct type of data (e.g. int), 
 # select and filter data you want to use
@@ -287,6 +285,75 @@ wide_data <- data %>%
 View(wide_data) # wide, looking muuuch better
 
 long_data <- wide_data %>%
+  pivot_longer(2:13,
+               names_to = "year",
+               values_to = "lifeExp")
+# first which columns do you want to work with (skip first column - names),
+## then create a new variable 
+View(long_data)
+# we're now back to what we used to have, just 3 columns, name, year, lifeExp
 
+#===============================================================================================================================================================================================================
+# Describe and Summarise
+library(tidyverse)
+View(msleep)
+# Describe the spread, centrality and variance
+min(msleep$awake)
+max(msleep$awake)
+range(msleep$awake)
+IQR(msleep$awake)
+mean(msleep$awake)
+median(msleep$awake)
+var(msleep$awake)
 
-cont 26:31
+# Summary of a variable
+summary(msleep$awake)
+# Summary of multiple variables
+msleep %>%
+  select(sleep_total, brainwt) %>%
+  summary()
+
+# Task
+## Create a summary table
+## For each category of "vore
+## Show the min, max, difference
+## And average "sleep_total"
+## Arrange data by the average
+msleep %>%
+  drop_na(vore) %>%
+  group_by(vore) %>%
+  summarise(Lower = min(sleep_total),
+            Average = mean(sleep_total),
+            Upper = max(sleep_total),
+            Difference =
+              max(sleep_total)-min(sleep_total)) %>%
+  arrange(Average) %>%
+  View()
+
+# Creating contingency tables
+library(MASS)
+attach(Cars93)
+glimpse(Cars93)
+
+table(Origin)
+table(AirBags, Origin)
+addmargins(table(AirBags, Origin), 1)
+# 1 means 1 extra row, 2 = extra column, 0 = both
+
+table((AirBags, Origin))
+prop.table(table(AirBags, Origin))*100
+# prop.table(table(AirBags, Origin),2)*100
+## the 2 means that each column adds up to 100%, if left blank then both columns together = 100%
+round(prop.table(table(AirBags, Origin),2)*100)
+# rounded to the nearest whole number
+
+# Now, instead of doing addmargins, we can use tidyverse
+Cars93 %>%
+  group_by(Origin, AirBags) %>%
+  summarise(number = n()) %>%
+  pivot_wider(names_from = Origin,
+              values_from = number)
+  # like the previous table but the way we got there is different than addmargin
+
+#===============================================================================================================================================================================================================
+# Data Visualisation
