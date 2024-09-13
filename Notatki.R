@@ -382,3 +382,10 @@ gapminder %>%
 ## then we'd need our first argument to be:
 # ggplot(data = gapminder,
 #        aes(x = gdpPercap)) etc
+
+# ==========
+# More examples in Cheat Sheets/Data Visualisation
+# ==========
+
+#===============================================================================================================================================================================================================
+# Analysis
