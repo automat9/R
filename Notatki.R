@@ -3,6 +3,7 @@
 install.packages()
 library(tidyverse)
 %>% # = shift + ctrl + M
+
 # Common steps of data analysis using R: 
 # Explore
 # Clean
@@ -357,3 +358,27 @@ Cars93 %>%
 
 #===============================================================================================================================================================================================================
 # Data Visualisation
+library(tidyverse)
+library(gapminder)
+
+View(gapminder)
+
+gapminder %>%
+  filter(continent %in% c("Africa", "Europe")) %>%
+  filter(gdpPercap < 30000) %>%
+  ggplot(aes(x = gdpPercap,
+             y = lifeExp,
+             size = pop,
+             color = year)) +
+  geom_point() +
+  facet_wrap(~continent)+
+  labs(title = "Life expectancty explained by GDP",
+       x = "GDP Per capita",
+       y = "Life Expectancy")
+
+
+
+# If we were to use ggplot on its own (here it's part of the tidyverse library),
+## then we'd need our first argument to be:
+# ggplot(data = gapminder,
+#        aes(x = gdpPercap)) etc
