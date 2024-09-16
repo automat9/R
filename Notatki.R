@@ -389,3 +389,51 @@ gapminder %>%
 
 #===============================================================================================================================================================================================================
 # Analysis
+library(tidyverse)
+library(patchwork)
+library(gapminder)
+
+View(gapminder)
+
+########## Single sample t-test ##########
+# H0: mean life expectancy is 50 years
+# H1: mean life expectancy is not 50 years
+
+# Observation: Sample data provides a mean life expectancy of 48.9.
+# Is this statististically significant?
+
+gapminder %>%
+  filter(continent == "Africa") %>%
+  select(lifeExp) %>%
+  t.test(mu = 50)
+# Of all the observations, we only want observations where continent is Africa
+# mu being population mean
+# Result = p-value, probability that we would get the same result under the assumption that null is true
+
+my_ttest <- gapminder %>%
+  filter(continent == "Africa") %>%
+  select(lifeExp) %>%
+  t.test(mu = 50)
+# same code but assigning the results to a variable, now we can search for specific things
+attributes(my_ttest)
+# names of all callable functions
+my_ttest$p.value
+
+########## two sided t-test for difference of means ##########
+gapminder %>%
+  filter(continent %in% c("Africa", "Europe")) %>%
+  t.test(lifeExp ~ continent, data = .,
+         alternative = "two.sided")
+# data - . is where you want to pipe that data into
+
+########## one sided t-test for difference of means ##########
+gapminder %>%
+  filter(country %in% c("Ireland", "Switzerland")) %>%
+  t.test(lifeExp ~ country, data = .,
+         alternative = "less",
+         conf.level = 0.95)
+# alternative "less" is what makes this code a one sided t-test
+# null mean lifeExp in Ireland is greater or equal to the mean lifeExp in Switzerland
+# alt mean lifeExp is LESS THAN the mean lifeExp in Switzerland
+
+cont 18:20
