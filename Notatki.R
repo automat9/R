@@ -435,5 +435,24 @@ gapminder %>%
 # alternative "less" is what makes this code a one sided t-test
 # null mean lifeExp in Ireland is greater or equal to the mean lifeExp in Switzerland
 # alt mean lifeExp is LESS THAN the mean lifeExp in Switzerland
+# if we didn't put conf.level it would default to 0.95 anyway
+# P HACKING reducing sig level to 90% because our results are 0.05835 and we want them to be significant - BAD SCIENCE
 
-cont 18:20
+########## paired t-test ##########
+gapminder %>%
+  filter(year %in% c(1957, 2007)&
+           continent == "Africa") %>%
+  mutate(year = factor(year, levels = c(2007, 1957))) %>%
+  t.test(lifeExp ~ year, data = .,
+         paired = TRUE)
+# code won't work, but this is basically how to do a paired test
+
+### ASSUMPTIONS OF T-TEST ###
+# 1) Large, representative sample
+# 2) Values are normally distributed 
+# 3) Two samples have similar variance
+var(gapminder$lifeExp[gapminder$country=="Ireland"])
+var(gapminder$lifeExp[gapminder$country=="Switzerland"])
+# variance 13 and 16, so not that bad 
+
+
