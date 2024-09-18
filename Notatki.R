@@ -455,4 +455,23 @@ var(gapminder$lifeExp[gapminder$country=="Ireland"])
 var(gapminder$lifeExp[gapminder$country=="Switzerland"])
 # variance 13 and 16, so not that bad 
 
+#===============================================================================================================================================================================================================
+# Probability
 
+########## Binomial Distribution ##########
+# To find exactly one outcome use the dbinom function
+# P(X = 3)
+dbinom(x = 3, size = 20, prob = 1/6)
+# 0.2378866 
+
+# To find cumulative probability use pbinom
+# P(X < 20)
+pbinom(19, size = 50, prob = 0.6)
+# 19 because in binomial P(X < 20) = P(X ≤ 19)
+
+# To calculate >, you need to reorganise your formula
+# P(X > 20) = 1 - P(X ≤ 20)
+1 - pbinom(20, size = 50, prob = 0.6)
+# note q = 20 not 19
+
+########## Normal Distribution ##########
