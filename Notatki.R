@@ -475,4 +475,3 @@ pbinom(19, size = 50, prob = 0.6)
 # note q = 20 not 19
 
 ########## Normal Distribution ##########
-.
