@@ -485,4 +485,12 @@ pnorm(5, mean = 3, sd = 2)
 
 qnorm(p, mean, sd) # inverse cdf of the normal distribution, returns the value x such that pnorm(x, mean, sd) = p
 
-cont: 2:50
+# Example: Flipper lengths of a certain kind of penguin are normally distributed with mean 192.9mm and standard deviation 7.1mm
+# 1) What is the probability that a randomly-selected penguin has a flipper less than 200mm long? More than 200mm?
+# 2) What is the 90th percentile for flippers length in these penguins?
+# 3) Simulate 500 random selections from this population and plot the results
+
+## ANSWERS
+# 1) P(X<200mm) = pnorm(200, 192.9, 7.1) = 0.8413447 AND P(X>200mm) = 1 - pnorm(200, 192.9, 7.1) = 0.1586553
+# 2) qnorm(.90, 192.9, 7.1) = 201.999
+# 3) flippers <- rnorm(500, 192.9, 7.1) ==> library(ggplot2)/ or tidyverse ==> qplot(flippers, col = I("black"))
