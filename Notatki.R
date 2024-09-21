@@ -475,3 +475,14 @@ pbinom(19, size = 50, prob = 0.6)
 # note q = 20 not 19
 
 ########## Normal Distribution ##########
+rnorm(5, mean = 0, sd = 1)
+# rnorm(n, mean = x, sd = y) = generates n random values from the normal distribution with mean x and standard deviation y
+
+pnorm(5, mean = 3, sd = 2)
+# pnorm is the cumulative distribution function of the normal distribution
+# 5 meaning P(X≤5), so to get P(X≥5) you'd do 1-P(X<5)
+# remember P(X<x) = 1-P(X≥x) & P(X≤x) = 1-P(X>x)
+
+qnorm(p, mean, sd) # inverse cdf of the normal distribution, returns the value x such that pnorm(x, mean, sd) = p
+
+cont: 2:50
