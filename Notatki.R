@@ -358,6 +358,20 @@ Cars93 %>%
 
 #===============================================================================================================================================================================================================
 # Data Visualisation
+
+# gg stands for grammar of graphics
+# grammar being: data, aesthetics, geometry 
+
+# Data - this is what our plots will visualise
+# Aesthetics - X & Y axes, point colour etc
+# Geometry - scatterbox, barplot, lineplot, histogram etc
+
+# Basic Anatomy of a ggplot code
+ggplot(data=your_data, aes(x=var1, y=var2)) +
+  geom_point(aes(color=var3, fill))
+
+
+# Example
 library(tidyverse)
 library(gapminder)
 
@@ -379,12 +393,14 @@ gapminder %>%
 
 
 # If we were to use ggplot on its own (here it's part of the tidyverse library),
-## then we'd need our first argument to be:
+## then in line 369 we'd need our first argument to be:
 # ggplot(data = gapminder,
 #        aes(x = gdpPercap)) etc
 
+
+
 # ==========
-# More examples in Cheat Sheets/Data Visualisation
+# More examples in Cheat Sheets/Visualisation/Data Visualisation
 # ==========
 
 #===============================================================================================================================================================================================================
